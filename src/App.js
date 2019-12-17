@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 
 import Navbar from "./components/Navbar";
@@ -7,20 +8,28 @@ import Todos from "./components/Todos";
 import Alert from "./components/Alert";
 import TodoState from "./context/todo/TodoState";
 import TodoSummary from "./components/TodoSummary";
+import About from "./components/About";
 
 function App() {
   return (
-    <TodoState>
-      <Fragment>
-        <Navbar />
-        <main className="main-content">
-          <Alert />
-          <AddTodo />
-          <TodoSummary />
-          <Todos />
-        </main>
-      </Fragment>
-    </TodoState>
+    <Router>
+      <TodoState>
+        <Fragment>
+          <Navbar />
+          <main className="main-content">
+            <Switch>
+              <Route exact path="/">
+                <Alert />
+                <AddTodo />
+                <TodoSummary />
+                <Todos />
+              </Route>
+              <Route path="/about" component={About} />
+            </Switch>
+          </main>
+        </Fragment>
+      </TodoState>
+    </Router>
   );
 }
 
